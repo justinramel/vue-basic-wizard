@@ -9,13 +9,20 @@
         <input type="text" placeholder="NE1 7RU" v-model="address.postCode" />
       </label>
     </form>
-    <button v-on:click="next">Next</button>
-    <button v-on:click="prev">Prev</button>
+    <button v-on:click="nextStep">Next</button>
+    <button v-on:click="prevStep">Prev</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  props: ['address', 'next', 'prev']
+  computed: {
+    ...mapState({ address: state => state.address })
+  },
+  methods: {
+    ...mapActions(['nextStep', 'prevStep'])
+  }
 }
 </script>

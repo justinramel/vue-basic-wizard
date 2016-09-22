@@ -1,65 +1,26 @@
 <template>
   <div class="wizard">
-    <user v-if="step === 1"
-          :user="user"
-          :next="handleNext"></user>
-    <address v-if="step === 2"
-             :address="address"
-             :next="handleNext"
-             :prev="handlePrev"></address>
-    <result v-if="step === 3"
-             :data="data()"
-             :prev="handlePrev"
-             :reset="handleReset"></result>
+    <h2>Step {{ step }}</h2>
+    <user-form v-if="step === 1" />
+    <address-form v-if="step === 2" />
+    <result v-if="step === 3" />
   </div>
 </template>
 
 <script>
-import User from './User'
-import Address from './Address'
+import { mapState } from 'vuex'
+import UserForm from './UserForm'
+import AddressForm from './AddressForm'
 import Result from './Result'
-
-const INITIAL_STATE = {
-  step: 1,
-  user: {
-    firstName: 'Justin',
-    lastName: 'Ramel'
-  },
-  address: {
-    line1: '1 Claremont Tower',
-    postCode: 'NE1 7RU'
-  }
-}
 
 export default {
   components: {
-    User,
-    Address,
+    UserForm,
+    AddressForm,
     Result
   },
-  data () {
-    return INITIAL_STATE
-  },
-  methods: {
-    data: function () {
-      return JSON.stringify({ user: this.user, address: this.address }, null, 2)
-    },
-    handleNext: function () {
-      this.step = this.step + 1
-    },
-    handlePrev: function () {
-      this.step = this.step - 1
-    },
-    handleReset: function () {
-      this.$data = INITIAL_STATE
-    }
+  computed: {
+    ...mapState({ step: state => state.step })
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-h1 {
-  color: #42b983;
-}
-</style>

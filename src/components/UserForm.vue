@@ -9,12 +9,19 @@
         <input type="text" placeholder="Blogs" v-model="user.lastName" />
       </label>
     </form>
-    <button v-on:click="next">Next</button>
+    <button v-on:click="nextStep">Next</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  props: ['user', 'next']
+  computed: {
+    ...mapState({ user: state => state.user })
+  },
+  methods: {
+    ...mapActions(['nextStep'])
+  }
 }
 </script>
