@@ -1,9 +1,9 @@
 <template>
   <div class="wizard">
     <h2>Step {{ step }}</h2>
-    <user-form v-if="step === 1" />
+    <user-form    v-if="step === 1" />
     <address-form v-if="step === 2" />
-    <result v-if="step === 3" />
+    <result       v-if="step === 3" />
   </div>
 </template>
 
